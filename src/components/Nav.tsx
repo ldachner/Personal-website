@@ -16,7 +16,12 @@ export default function Nav() {
       >
         Writing
       </NavLink>
-      <span className="nav-link nav-link--disabled">Travel</span>
+      <NavLink
+        to="/travel"
+        className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+      >
+        Travel
+      </NavLink>
       <span className="nav-link nav-link--disabled">Strava</span>
     </nav>
   )

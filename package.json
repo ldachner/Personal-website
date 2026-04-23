@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "front-matter": "^4.0.2",
+    "prop-types": "^15.8.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.14.2",
+    "react-simple-maps": "^3.0.0",
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {

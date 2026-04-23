@@ -9,7 +9,18 @@
       "Bash(brew install *)",
       "Bash(npm install *)",
       "Bash(npm run *)",
-      "Bash(curl -s http://localhost:5173)"
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(git push *)",
+      "Bash(pkill *)",
+      "Bash(curl -s http://localhost:5173/src/content.ts)",
+      "Bash(curl -s \"http://localhost:5173/src/App.tsx\")",
+      "Bash(curl -s \"http://localhost:5173/node_modules/.vite/deps/gray-matter.js?v=83a3e63a\")",
+      "Bash(curl -s \"http://localhost:5173/src/pages/Home.tsx\")",
+      "Bash(curl -s \"http://localhost:5173/node_modules/.vite/deps/chunk-PR4QN5HX.js?v=83a3e63a\")",
+      "Bash(curl -s \"http://localhost:5173/src/content/essays/example-essay.md?import&raw\")",
+      "Bash(curl -s \"http://localhost:5173/src/content/bio.md?import&raw\")",
+      "Bash(npx tsc *)",
+      "Bash(npm uninstall *)"
     ]
   }
 }
