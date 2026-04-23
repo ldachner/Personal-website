@@ -1,6 +1,11 @@
 import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import GlowOverlay from './GlowOverlay'
+import Nav from './components/Nav'
+import Home from './pages/Home'
+import Writing from './pages/Writing'
+import Essay from './pages/Essay'
 
 function App() {
   const [foldClass, setFoldClass] = useState('');
@@ -9,22 +14,26 @@ function App() {
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
     const threshold = 20;
-    
+
     let newFoldClass = '';
     if (clientY < threshold && clientX < threshold) newFoldClass = 'fold-top-left';
     else if (clientY < threshold && clientX > innerWidth - threshold) newFoldClass = 'fold-top-right';
     else if (clientY > innerHeight - threshold && clientX < threshold) newFoldClass = 'fold-bottom-left';
     else if (clientY > innerHeight - threshold && clientX > innerWidth - threshold) newFoldClass = 'fold-bottom-right';
-    
+
     setFoldClass(newFoldClass);
   };
 
   return (
     <>
       <GlowOverlay />
+      <Nav />
       <div className={`page-content ${foldClass}`} onMouseMove={handleMouseMove}>
-        <h1>Liam's Personal Website</h1>
-        <p>More coming soon!</p>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/writing" element={<Writing />} />
+          <Route path="/writing/:slug" element={<Essay />} />
+        </Routes>
       </div>
     </>
   )

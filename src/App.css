@@ -121,3 +121,103 @@ h1, p {
   font-size: 1.2em;
   line-height: 1.5;
 }
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 2rem;
+  padding: 1.25rem calc(5vw + 2rem);
+  z-index: 100;
+  background: transparent;
+}
+
+.nav-link {
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 400;
+  text-decoration: none;
+  color: #111;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.nav-link.active {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.nav-link--disabled {
+  color: #aaa;
+  cursor: default;
+}
+
+.home-section {
+  max-width: 640px;
+  margin-bottom: 3rem;
+}
+
+.writing-index h1 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0 0 2rem 0;
+}
+
+.essay-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.essay-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #e8e4d0;
+  max-width: 600px;
+}
+
+.essay-link {
+  text-decoration: none;
+  color: #111;
+  font-size: 1rem;
+}
+
+.essay-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.essay-date {
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 300;
+  white-space: nowrap;
+  margin-left: 2rem;
+}
+
+.essay-header {
+  margin-bottom: 2.5rem;
+}
+
+.essay-header h1 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.25;
+}
+
+.essay-body {
+  max-width: 640px;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.essay-body p {
+  margin: 0 0 1.25rem 0;
+}

@@ -71,8 +71,18 @@ export const GlowOverlay: React.FC = () => {
       setOpacity(calculatedOpacity);
     };
     
+    const handleMouseLeave = () => {
+      setEdge(null);
+      setVisible(false);
+      setOpacity(0);
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
   }, []);
 
   if (!visible || !edge) return null;
