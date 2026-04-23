@@ -1,7 +1,13 @@
-import matter from 'gray-matter'
+import fm from 'front-matter'
 import bioRaw from './content/bio.md?raw'
 import experienceRaw from './content/experience.md?raw'
 import projectsRaw from './content/projects.md?raw'
+
+interface EssayFrontmatter {
+  title: string
+  date: string
+  description: string
+}
 
 const essayModules = import.meta.glob('./content/essays/*.md', {
   query: '?raw',
@@ -18,28 +24,28 @@ export interface Essay {
 }
 
 export function getBioContent(): string {
-  return matter(bioRaw).content
+  return fm(bioRaw).body
 }
 
 export function getExperienceContent(): string {
-  return matter(experienceRaw).content
+  return fm(experienceRaw).body
 }
 
 export function getProjectsContent(): string {
-  return matter(projectsRaw).content
+  return fm(projectsRaw).body
 }
 
 export function parseEssays(): Essay[] {
   return Object.entries(essayModules)
     .map(([path, raw]) => {
-      const { data, content } = matter(raw)
+      const { attributes, body } = fm<EssayFrontmatter>(raw)
       const slug = path.split('/').pop()!.replace('.md', '')
       return {
         slug,
-        title: data['title'] as string,
-        date: data['date'] as string,
-        description: data['description'] as string,
-        content,
+        title: attributes.title,
+        date: attributes.date,
+        description: attributes.description,
+        content: body,
       }
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
