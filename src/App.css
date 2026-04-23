@@ -222,6 +222,10 @@ h1, p {
   margin: 0 0 1.25rem 0;
 }
 
+.travel-section {
+  align-self: stretch;
+}
+
 .travel-section h1 {
   font-size: 2rem;
   font-weight: 400;
@@ -237,29 +241,17 @@ h1, p {
 .map-container {
   position: relative;
   width: 100%;
-  max-width: 900px;
 }
 
 .map-tooltip {
   position: fixed;
   background: #111;
   color: #fbf9ee;
-  padding: 0.45rem 0.75rem;
+  padding: 0.35rem 0.65rem;
   font-size: 0.82rem;
   pointer-events: none;
   z-index: 9998;
-  max-width: 260px;
-  line-height: 1.45;
-}
-
-.map-tooltip strong {
-  display: block;
-  margin-bottom: 0.2rem;
-  font-weight: 600;
-}
-
-.map-tooltip span {
-  opacity: 0.8;
+  white-space: nowrap;
 }
 
 .strava-section h1 {

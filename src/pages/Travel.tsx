@@ -4,12 +4,7 @@ import { visitedCountries } from '../content/travel'
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
 
-type Tooltip = {
-  name: string
-  description: string
-  x: number
-  y: number
-}
+type Tooltip = { name: string; x: number; y: number }
 
 export default function Travel() {
   const [tooltip, setTooltip] = useState<Tooltip | null>(null)
@@ -21,7 +16,7 @@ export default function Travel() {
 
       <div className="map-container">
         <ComposableMap
-          projectionConfig={{ scale: 147, center: [15, 10] }}
+          projectionConfig={{ scale: 153, center: [15, 10] }}
           style={{ width: '100%', height: 'auto' }}
         >
           <Geographies geography={GEO_URL}>
@@ -41,14 +36,10 @@ export default function Travel() {
                       default: { outline: 'none' },
                     }}
                     onMouseEnter={(evt) => {
-                      if (visited) {
-                        setTooltip({ ...visited, x: evt.clientX, y: evt.clientY })
-                      }
+                      if (visited) setTooltip({ name: visited.name, x: evt.clientX, y: evt.clientY })
                     }}
                     onMouseMove={(evt) => {
-                      if (visited) {
-                        setTooltip((prev) => prev ? { ...prev, x: evt.clientX, y: evt.clientY } : null)
-                      }
+                      if (visited) setTooltip((prev) => prev ? { ...prev, x: evt.clientX, y: evt.clientY } : null)
                     }}
                     onMouseLeave={() => setTooltip(null)}
                   />
@@ -59,12 +50,8 @@ export default function Travel() {
         </ComposableMap>
 
         {tooltip && (
-          <div
-            className="map-tooltip"
-            style={{ left: tooltip.x + 14, top: tooltip.y - 42 }}
-          >
-            <strong>{tooltip.name}</strong>
-            <span>{tooltip.description}</span>
+          <div className="map-tooltip" style={{ left: tooltip.x + 14, top: tooltip.y - 42 }}>
+            {tooltip.name}
           </div>
         )}
       </div>
