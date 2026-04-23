@@ -130,8 +130,8 @@ h1, p {
   display: flex;
   gap: 2rem;
   padding: 1.25rem calc(5vw + 2rem);
-  z-index: 100;
-  background: transparent;
+  z-index: 10000;
+  background: #fbf9ee;
 }
 
 .nav-link {
