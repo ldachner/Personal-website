@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Writing from './pages/Writing'
 import Essay from './pages/Essay'
 import Travel from './pages/Travel'
+import Strava from './pages/Strava'
 
 function App() {
   const [foldClass, setFoldClass] = useState('');
@@ -35,6 +36,7 @@ function App() {
           <Route path="/writing" element={<Writing />} />
           <Route path="/writing/:slug" element={<Essay />} />
           <Route path="/travel" element={<Travel />} />
+          <Route path="/strava" element={<Strava />} />
         </Routes>
       </div>
     </>

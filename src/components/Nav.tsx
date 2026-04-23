@@ -22,7 +22,12 @@ export default function Nav() {
       >
         Travel
       </NavLink>
-      <span className="nav-link nav-link--disabled">Strava</span>
+      <NavLink
+        to="/strava"
+        className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+      >
+        Strava
+      </NavLink>
     </nav>
   )
 }
