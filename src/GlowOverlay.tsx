@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-const EDGE_THRESHOLD = 25; // px
-const FADE_DISTANCE = 30; // px - additional distance for fade
+const EDGE_THRESHOLD = 25;
+const FADE_DISTANCE = 30;
 
 type Edge = 'top' | 'bottom' | 'left' | 'right' | null;
 
@@ -14,63 +14,48 @@ export const GlowOverlay: React.FC = () => {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
-      
+      const scrollY = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight;
+
       setCursorPos({ x: clientX, y: clientY });
-      
-      // Calculate distance from each edge
-      const distanceFromTop = clientY;
-      const distanceFromBottom = innerHeight - clientY;
-      const distanceFromLeft = clientX;
-      const distanceFromRight = innerWidth - clientX;
-      
-      // Find the closest edge and calculate opacity
+
+      const distFromDocTop = scrollY + clientY;
+      const distFromDocBottom = docHeight - scrollY - clientY;
+      const distFromLeft = clientX;
+      const distFromRight = window.innerWidth - clientX;
+
       let newEdge: Edge = null;
       let minDistance = Infinity;
+
+      if (distFromDocTop < EDGE_THRESHOLD + FADE_DISTANCE && distFromDocTop < minDistance) {
+        minDistance = distFromDocTop;
+        newEdge = 'top';
+      }
+      if (distFromDocBottom < EDGE_THRESHOLD + FADE_DISTANCE && distFromDocBottom < minDistance) {
+        minDistance = distFromDocBottom;
+        newEdge = 'bottom';
+      }
+      if (distFromLeft < EDGE_THRESHOLD + FADE_DISTANCE && distFromLeft < minDistance) {
+        minDistance = distFromLeft;
+        newEdge = 'left';
+      }
+      if (distFromRight < EDGE_THRESHOLD + FADE_DISTANCE && distFromRight < minDistance) {
+        minDistance = distFromRight;
+        newEdge = 'right';
+      }
+
       let calculatedOpacity = 0;
-      
-      if (distanceFromTop < EDGE_THRESHOLD + FADE_DISTANCE) {
-        if (distanceFromTop < minDistance) {
-          minDistance = distanceFromTop;
-          newEdge = 'top';
-        }
+      if (newEdge) {
+        calculatedOpacity = minDistance <= EDGE_THRESHOLD
+          ? 1
+          : 1 - (minDistance - EDGE_THRESHOLD) / FADE_DISTANCE;
       }
-      if (distanceFromBottom < EDGE_THRESHOLD + FADE_DISTANCE) {
-        if (distanceFromBottom < minDistance) {
-          minDistance = distanceFromBottom;
-          newEdge = 'bottom';
-        }
-      }
-      if (distanceFromLeft < EDGE_THRESHOLD + FADE_DISTANCE) {
-        if (distanceFromLeft < minDistance) {
-          minDistance = distanceFromLeft;
-          newEdge = 'left';
-        }
-      }
-      if (distanceFromRight < EDGE_THRESHOLD + FADE_DISTANCE) {
-        if (distanceFromRight < minDistance) {
-          minDistance = distanceFromRight;
-          newEdge = 'right';
-        }
-      }
-      
-      // Calculate opacity based on distance
-      if (newEdge && minDistance <= EDGE_THRESHOLD + FADE_DISTANCE) {
-        if (minDistance <= EDGE_THRESHOLD) {
-          // Full opacity within threshold
-          calculatedOpacity = 1;
-        } else {
-          // Linear fade from threshold to fade distance
-          const fadeProgress = (minDistance - EDGE_THRESHOLD) / FADE_DISTANCE;
-          calculatedOpacity = 1 - fadeProgress;
-        }
-      }
-      
+
       setEdge(newEdge);
       setVisible(!!newEdge && calculatedOpacity > 0);
       setOpacity(calculatedOpacity);
     };
-    
+
     const handleMouseLeave = () => {
       setEdge(null);
       setVisible(false);
@@ -88,7 +73,7 @@ export const GlowOverlay: React.FC = () => {
   if (!visible || !edge) return null;
 
   return (
-    <div 
+    <div
       className={`glow-overlay glow-${edge}`}
       style={{
         '--cursor-x': `${cursorPos.x}px`,
@@ -99,4 +84,4 @@ export const GlowOverlay: React.FC = () => {
   );
 };
 
-export default GlowOverlay; 
+export default GlowOverlay;

@@ -241,6 +241,18 @@ h1, p {
 .map-container {
   position: relative;
   width: 100%;
+  overflow: hidden;
+}
+
+.map-inner {
+  margin-top: -14%;
+  margin-bottom: -8%;
+}
+
+.strava-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .map-tooltip {
@@ -311,4 +323,92 @@ h1, p {
   font-size: 0.82rem;
   color: #888;
   font-weight: 300;
+}
+
+.activity-route {
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.exp-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.exp-logo-wrap {
+  flex-shrink: 0;
+}
+
+.exp-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: contain;
+  border: 1px solid #e8e4d0;
+  background: #fff;
+  display: block;
+}
+
+.exp-logo--placeholder {
+  background: #e8e4d0;
+}
+
+.exp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.exp-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111;
+  margin: 0;
+}
+
+.exp-company {
+  font-size: 0.88rem;
+  color: #333;
+  margin: 0;
+}
+
+.exp-meta {
+  font-size: 0.82rem;
+  color: #888;
+  font-weight: 300;
+  margin: 0;
+}
+
+.exp-description {
+  font-size: 0.88rem;
+  color: #444;
+  margin: 0.35rem 0 0 0;
+}
+
+.site-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem calc(5vw + 2rem);
+  font-size: 0.82rem;
+  color: #888;
+  border-top: 1px solid #e8e4d0;
+}
+
+.footer-github {
+  color: #888;
+  display: flex;
+  align-items: center;
+  transition: color 150ms;
+}
+
+.footer-github:hover {
+  color: #111;
 }

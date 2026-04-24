@@ -1,14 +1,5 @@
 import { useEffect, useState } from 'react'
-
-interface Activity {
-  id: number
-  name: string
-  sport_type: string
-  start_date: string
-  distance: number
-  moving_time: number
-  total_elevation_gain: number
-}
+import { load, decodePolyline, routeToSvgPath, type Activity } from '../stravaCache'
 
 const SPORT_EMOJI: Record<string, string> = {
   Run: '🏃',
@@ -43,17 +34,24 @@ function formatDate(iso: string): string {
   })
 }
 
+function RouteThumbnail({ polyline }: { polyline: string }) {
+  const points = decodePolyline(polyline)
+  const path = routeToSvgPath(points, 64, 64, 6)
+  if (!path) return null
+  return (
+    <svg className="activity-route" width={64} height={64} viewBox="0 0 64 64">
+      <path d={path} fill="none" stroke="#c4a265" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 export default function Strava() {
   const [activities, setActivities] = useState<Activity[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('/api/strava')
-      .then((r) => {
-        if (!r.ok) throw new Error('Failed to load activities')
-        return r.json() as Promise<Activity[]>
-      })
+    load()
       .then(setActivities)
       .catch((e: Error) => setError(e.message))
       .finally(() => setLoading(false))
@@ -62,7 +60,13 @@ export default function Strava() {
   return (
     <section className="strava-section">
       <h1>Activity</h1>
-      <p className="strava-subtitle">Recent Strava activity</p>
+      <p className="strava-subtitle">
+        Follow me on{' '}
+        <a href="https://www.strava.com/athletes/53842910" target="_blank" rel="noopener noreferrer" className="strava-link">
+          Strava
+        </a>
+        .
+      </p>
 
       {loading && <p className="strava-status">Loading…</p>}
       {error && <p className="strava-status strava-error">{error}</p>}
@@ -83,6 +87,9 @@ export default function Strava() {
                   {a.total_elevation_gain > 0 && ` · ↑${Math.round(a.total_elevation_gain)}m`}
                 </span>
               </div>
+              {a.map.summary_polyline && (
+                <RouteThumbnail polyline={a.map.summary_polyline} />
+              )}
             </li>
           ))}
         </ul>

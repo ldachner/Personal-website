@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import GlowOverlay from './GlowOverlay'
 import Nav from './components/Nav'
+import Footer from './components/Footer'
 import Home from './pages/Home'
 import Writing from './pages/Writing'
 import Essay from './pages/Essay'
@@ -39,6 +40,7 @@ function App() {
           <Route path="/strava" element={<Strava />} />
         </Routes>
       </div>
+      <Footer />
     </>
   )
 }

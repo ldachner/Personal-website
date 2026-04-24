@@ -1,6 +1,5 @@
 import fm from 'front-matter'
 import bioRaw from './content/bio.md?raw'
-import experienceRaw from './content/experience.md?raw'
 import projectsRaw from './content/projects.md?raw'
 
 interface EssayFrontmatter {
@@ -25,10 +24,6 @@ export interface Essay {
 
 export function getBioContent(): string {
   return fm(bioRaw).body
-}
-
-export function getExperienceContent(): string {
-  return fm(experienceRaw).body
 }
 
 export function getProjectsContent(): string {

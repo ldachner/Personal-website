@@ -12,9 +12,10 @@ export default function Travel() {
   return (
     <section className="travel-section">
       <h1>Travel</h1>
-      <p className="travel-count">{Object.keys(visitedCountries).length} countries</p>
+      <p className="travel-count">Countries I have been to so far.</p>
 
       <div className="map-container">
+        <div className="map-inner">
         <ComposableMap
           projectionConfig={{ scale: 153, center: [15, 10] }}
           style={{ width: '100%', height: 'auto' }}
@@ -48,6 +49,7 @@ export default function Travel() {
             }
           </Geographies>
         </ComposableMap>
+        </div>
 
         {tooltip && (
           <div className="map-tooltip" style={{ left: tooltip.x + 14, top: tooltip.y - 42 }}>

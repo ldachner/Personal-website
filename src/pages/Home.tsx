@@ -1,12 +1,13 @@
+import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import {
-  getBioContent,
-  getExperienceContent,
-  getProjectsContent,
-} from '../content'
+import { getBioContent, getProjectsContent } from '../content'
+import { prefetch } from '../stravaCache'
+import ExperienceList from '../components/ExperienceList'
 
 export default function Home() {
+  useEffect(() => { prefetch() }, [])
+
   return (
     <>
       <section className="home-section">
@@ -16,9 +17,7 @@ export default function Home() {
       </section>
       <section className="home-section">
         <h2>Experience</h2>
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {getExperienceContent()}
-        </ReactMarkdown>
+        <ExperienceList />
       </section>
       <section className="home-section">
         <h2>Featured Work</h2>
